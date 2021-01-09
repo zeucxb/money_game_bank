@@ -1,5 +1,8 @@
+import 'package:money_game_bank/modules/bank/application/usecases/add_transaction.dart';
+import 'package:money_game_bank/modules/bank/application/usecases/subtract_transaction%20copy.dart';
+
 import '../../../../core/infra/factory.dart';
-import '../../application/usecases/account_transaction.dart';
+import '../../application/usecases/bank_transfer.dart';
 import '../../application/usecases/create_account.dart';
 import '../../application/usecases/list_accounts.dart';
 import '../../presentation/presenters/bank_presenter.dart';
@@ -12,6 +15,8 @@ class BankPresenterFactory implements Factory<BankPresenter> {
   BankPresenter call() => BankPresenter(
         CreateAccount(accountRepository),
         ListAccounts(accountRepository),
-        AccountTransaction(accountRepository),
+        AddTransaction(accountRepository),
+        SubtractTransaction(accountRepository),
+        BankTransfer(accountRepository),
       );
 }

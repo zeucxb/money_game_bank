@@ -1,1 +1,0 @@
-enum TransactionType { addition, subtraction }

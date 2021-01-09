@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/enums/transaction_type.dart';
-
 class MoneyTransactionDialog extends StatefulWidget {
-  final TransactionType transactionType;
+  final String title;
 
-  const MoneyTransactionDialog({Key key, @required this.transactionType})
-      : super(key: key);
+  const MoneyTransactionDialog({Key key, @required this.title})
+      : assert(title != null),
+        super(key: key);
 
   @override
   _MoneyTransactionDialogState createState() => _MoneyTransactionDialogState();
@@ -17,14 +16,8 @@ class _MoneyTransactionDialogState extends State<MoneyTransactionDialog> {
 
   @override
   Widget build(BuildContext context) {
-    var title = 'Adicionar';
-
-    if (widget.transactionType == TransactionType.subtraction) {
-      title = 'Subtrair';
-    }
-
     return AlertDialog(
-      title: Text(title),
+      title: Text(widget.title),
       content: TextFormField(
         controller: _txtController,
         keyboardType: TextInputType.number,

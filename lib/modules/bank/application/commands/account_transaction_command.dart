@@ -1,10 +1,8 @@
-import '../../../../utils/enums/transaction_type.dart';
+import '../models/account_model.dart';
 
 class AccountTransactionCommand {
-  final int id;
-  final double oldValue;
-  final double newValue;
-  final TransactionType type;
+  final AccountModel account;
+  final double value;
 
-  AccountTransactionCommand(this.id, this.oldValue, this.newValue, this.type);
+  AccountTransactionCommand(this.account, this.value);
 }

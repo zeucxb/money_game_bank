@@ -50,12 +50,11 @@ mixin _$BankPresenter on _BankPresenterBase, Store {
   }
 
   @override
-  void transaction(
-      AccountViewModel account, double value, TransactionType type) {
+  void transaction(TransactionViewModel transaction) {
     final _$actionInfo = _$_BankPresenterBaseActionController.startAction(
         name: '_BankPresenterBase.transaction');
     try {
-      return super.transaction(account, value, type);
+      return super.transaction(transaction);
     } finally {
       _$_BankPresenterBaseActionController.endAction(_$actionInfo);
     }
