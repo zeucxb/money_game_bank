@@ -1,0 +1,4 @@
+* Infra que implementa o repository, logo Infra acaba por conhecer a Entity, se a Infra conhece Entity faz sentido tantos DTOS? (Preocupação com Overengineering)
+   |-> Criar mais abstração para Infra não conhecer a Entity realmente faz sentido? É mesmo a melhor solução? Ajuda ou atrapalha?
+   
+* Faz sentido reescrever os adapters (adapters e não repositories) em cada modulo, adapters como HttpAdapter não deveriam ficar no core?

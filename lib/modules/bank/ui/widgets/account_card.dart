@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../modules/bank/presentation/presenters/bank_presenter.dart';
-import '../../modules/bank/presentation/viewmodels/account_viewmodel.dart';
+import '../../presentation/presenters/bank_presenter.dart';
+import '../../presentation/viewmodels/account_viewmodel.dart';
 
 class AccountCard extends StatelessWidget {
   final AccountViewModel account;

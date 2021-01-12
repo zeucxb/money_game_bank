@@ -1,7 +1,7 @@
 import '../../domain/entities/account_entity.dart';
 import '../../domain/repositories/account_repository.dart';
 
-class AccountRepositoryAdapter implements AccountRepository {
+class AccountRepositoryImpl implements AccountRepository {
   final List<AccountEntity> accountList = [];
 
   @override

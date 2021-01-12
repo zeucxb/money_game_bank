@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'ui/screens/account_list/bank_screen.dart';
+import 'modules/bank/ui/screens/bank_screen.dart';
 
 void main() {
   runApp(MyApp());

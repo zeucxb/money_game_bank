@@ -1,4 +1,4 @@
-import '../../../../core/application/usecase.dart';
+import '../../../../core/usecase/usecase.dart';
 import '../../domain/repositories/account_repository.dart';
 import '../commands/account_transaction_command.dart';
 import '../models/account_model.dart';

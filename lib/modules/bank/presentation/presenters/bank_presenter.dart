@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 
-import '../../../../core/application/usecase.dart';
+import '../../../../core/usecase/usecase.dart';
 import '../../application/commands/account_transaction_command.dart';
 import '../../application/commands/bank_transfer_command.dart';
 import '../../application/commands/create_account_command.dart';

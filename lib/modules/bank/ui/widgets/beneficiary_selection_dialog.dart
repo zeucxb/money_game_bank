@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../modules/bank/presentation/viewmodels/account_viewmodel.dart';
+import '../../presentation/viewmodels/account_viewmodel.dart';
 
 class BeneficiarySelectionDialog extends StatefulWidget {
   final List<AccountViewModel> beneficiaries;

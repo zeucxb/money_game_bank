@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../../../modules/bank/infra/factories/bank_presenter_factory.dart';
-import '../../../modules/bank/presentation/presenters/bank_presenter.dart';
-import '../../../modules/bank/presentation/viewmodels/account_viewmodel.dart';
-import '../../../modules/bank/presentation/viewmodels/transaction_viewmodel.dart';
-import '../../../modules/bank/presentation/viewmodels/transfer_viewmodel.dart';
-import '../../widgets/account_card.dart';
-import '../../widgets/beneficiary_selection_dialog.dart';
-import '../../widgets/create_account_dialog.dart';
-import '../../widgets/money_transaction_dialog.dart';
+import '../../infra/factories/bank_presenter_factory.dart';
+import '../../presentation/presenters/bank_presenter.dart';
+import '../../presentation/viewmodels/account_viewmodel.dart';
+import '../../presentation/viewmodels/transaction_viewmodel.dart';
+import '../../presentation/viewmodels/transfer_viewmodel.dart';
+import '../widgets/account_card.dart';
+import '../widgets/beneficiary_selection_dialog.dart';
+import '../widgets/create_account_dialog.dart';
+import '../widgets/money_transaction_dialog.dart';
 
 class BankScreen extends StatelessWidget {
   final BankPresenter bankPresenter = BankPresenterFactory().call()
