@@ -28,11 +28,11 @@ mixin _$BankPresenter on _BankPresenterBase, Store {
       ActionController(name: '_BankPresenterBase');
 
   @override
-  void create(BankPresenterParams params) {
+  void create(AccountViewModel account) {
     final _$actionInfo = _$_BankPresenterBaseActionController.startAction(
         name: '_BankPresenterBase.create');
     try {
-      return super.create(params);
+      return super.create(account);
     } finally {
       _$_BankPresenterBaseActionController.endAction(_$actionInfo);
     }

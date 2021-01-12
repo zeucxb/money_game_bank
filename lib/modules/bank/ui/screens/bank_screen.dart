@@ -26,7 +26,12 @@ class BankScreen extends StatelessWidget {
     );
 
     if (name != null) {
-      bankPresenter.create(BankPresenterParams(name, 1000));
+      bankPresenter.create(
+        AccountViewModel(
+          name: name,
+          value: 1000,
+        ),
+      );
     }
   }
 

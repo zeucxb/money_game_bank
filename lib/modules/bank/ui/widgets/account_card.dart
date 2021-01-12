@@ -27,7 +27,16 @@ class AccountCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(account.name),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(account.name),
+                  IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () => bankPresenter.delete(account),
+                  ),
+                ],
+              ),
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 width: double.infinity,

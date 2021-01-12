@@ -29,4 +29,9 @@ class AccountRepositoryImpl implements AccountRepository {
 
     return newAccount;
   }
+
+  @override
+  void delete(int id) {
+    accountList.removeAt(id - 1);
+  }
 }

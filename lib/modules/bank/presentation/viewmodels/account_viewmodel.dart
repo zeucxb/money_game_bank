@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../../application/models/account_model.dart';
 
 class AccountViewModel {
@@ -5,7 +7,11 @@ class AccountViewModel {
   final String name;
   final double value;
 
-  AccountViewModel(this.id, this.name, this.value);
+  AccountViewModel({
+    this.id,
+    @required this.name,
+    @required this.value,
+  });
 
-  toModel() => AccountModel(id, name, value);
+  AccountModel toModel() => AccountModel(id, name, value);
 }

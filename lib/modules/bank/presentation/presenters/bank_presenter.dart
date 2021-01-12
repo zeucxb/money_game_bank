@@ -4,19 +4,13 @@ import '../../../../core/usecase/usecase.dart';
 import '../../application/commands/account_transaction_command.dart';
 import '../../application/commands/bank_transfer_command.dart';
 import '../../application/commands/create_account_command.dart';
+import '../../application/commands/delete_account_command.dart';
 import '../../application/models/account_model.dart';
 import '../viewmodels/account_viewmodel.dart';
 import '../viewmodels/transaction_viewmodel.dart';
 import '../viewmodels/transfer_viewmodel.dart';
 
 part 'bank_presenter.g.dart';
-
-class BankPresenterParams {
-  final String name;
-  final double value;
-
-  BankPresenterParams(this.name, this.value);
-}
 
 class BankPresenter = _BankPresenterBase with _$BankPresenter;
 
@@ -27,6 +21,7 @@ abstract class _BankPresenterBase with Store {
   final CommandUseCase<AccountTransactionCommand, AccountModel>
       _subtractTransaction;
   final CommandUseCase<BankTransferCommand, void> _bankTransfer;
+  final CommandUseCase<DeleteAccountCommand, AccountModel> _deleteAccount;
 
   _BankPresenterBase(
     this._createAccount,
@@ -34,6 +29,7 @@ abstract class _BankPresenterBase with Store {
     this._addTransaction,
     this._subtractTransaction,
     this._bankTransfer,
+    this._deleteAccount,
   );
 
   @observable
@@ -41,15 +37,21 @@ abstract class _BankPresenterBase with Store {
       ObservableList<AccountViewModel>();
 
   @action
-  void create(BankPresenterParams params) {
-    if (params.name == null || params.name.isEmpty || params.value == null)
+  void create(AccountViewModel account) {
+    if (account.name == null || account.name.isEmpty || account.value == null)
       return;
 
-    final command = CreateAccountCommand(params.name, params.value);
+    final command = CreateAccountCommand(account.name, account.value);
 
-    final account = _createAccount(command);
+    final createdAccount = _createAccount(command);
 
-    accounts.add(AccountViewModel(account.id, account.name, account.value));
+    accounts.add(
+      AccountViewModel(
+        id: createdAccount.id,
+        name: createdAccount.name,
+        value: createdAccount.value,
+      ),
+    );
   }
 
   @action
@@ -59,8 +61,11 @@ abstract class _BankPresenterBase with Store {
     accounts.addAll(
       _listAccounts()
           .map(
-            (account) =>
-                AccountViewModel(account.id, account.name, account.value),
+            (account) => AccountViewModel(
+              id: account.id,
+              name: account.name,
+              value: account.value,
+            ),
           )
           .toList(),
     );
@@ -88,9 +93,9 @@ abstract class _BankPresenterBase with Store {
     accounts.insert(
       updatedAccount.id - 1,
       AccountViewModel(
-        updatedAccount.id,
-        updatedAccount.name,
-        updatedAccount.value,
+        id: updatedAccount.id,
+        name: updatedAccount.name,
+        value: updatedAccount.value,
       ),
     );
   }
@@ -108,6 +113,12 @@ abstract class _BankPresenterBase with Store {
         transfer.value,
       ),
     );
+
+    listAccounts();
+  }
+
+  delete(AccountViewModel account) {
+    _deleteAccount(DeleteAccountCommand(account.toModel()));
 
     listAccounts();
   }
