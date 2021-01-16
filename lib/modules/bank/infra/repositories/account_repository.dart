@@ -21,7 +21,11 @@ class AccountRepositoryImpl implements AccountRepository {
   AccountEntity updateById(int id, double value) {
     final currentAccount = accountList[id - 1];
 
-    final newAccount = AccountEntity(currentAccount.name, value, id);
+    final newAccount = AccountEntity(
+      id: id,
+      name: currentAccount.name,
+      value: value,
+    );
 
     accountList.removeAt(id - 1);
 

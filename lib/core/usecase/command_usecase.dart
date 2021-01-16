@@ -1,3 +1,3 @@
 abstract class CommandUseCase<C, R> {
-  R call(C params);
+  R call(C command);
 }

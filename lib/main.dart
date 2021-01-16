@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'modules/bank/ui/screens/bank_screen.dart';
+import 'core/screens/bank_screen.dart';
 
 void main() {
   runApp(MyApp());
