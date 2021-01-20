@@ -14,6 +14,9 @@ dependencies:
   cupertino_icons: ^1.0.0
   mobx:
   flutter_mobx:
+  hive:
+  hive_flutter:
+  equatable:
 
 dev_dependencies:
   flutter_test:
@@ -23,6 +26,7 @@ dev_dependencies:
   test:
   mockito:
   faker:
+  hive_generator:
 
 flutter:
   uses-material-design: true
