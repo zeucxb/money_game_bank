@@ -1,5 +1,4 @@
-import 'package:money_game_bank/core/adapters/local_storege_adapter.dart';
-
+import '../../../../../core/adapters/local_storage_adapter.dart';
 import '../../../domain/entities/account_entity.dart';
 import '../models/account_model.dart';
 import 'account_datasource.dart';

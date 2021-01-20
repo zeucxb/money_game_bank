@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-import '../../../../core/adapters/local_storege_adapter.dart';
+import '../../../../core/adapters/local_storage_adapter.dart';
 import '../../../../core/factory/factory.dart';
 import '../../application/presenters/bank_presenter.dart';
 import '../../domain/usecases/add_transaction.dart';

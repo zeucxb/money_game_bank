@@ -83,16 +83,18 @@ class UsersList extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 20),
             child: Column(
               children: [
-                InkWell(
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    width: double.infinity,
-                    child: Center(
-                      child: Text('CLEAR'),
-                    ),
-                  ),
-                  onTap: () => bankPresenter.deleteAll(),
-                ),
+                accounts.length > 0
+                    ? InkWell(
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          width: double.infinity,
+                          child: Center(
+                            child: Text('CLEAR'),
+                          ),
+                        ),
+                        onTap: () => bankPresenter.deleteAll(),
+                      )
+                    : Container(),
                 ...accounts
                     .map(
                       (account) => AccountCard(

@@ -1,8 +1,7 @@
-import 'package:money_game_bank/modules/bank/domain/entities/account_entity.dart';
-
 import '../../../../core/usecase/usecase.dart';
 import '../../domain/repositories/account_repository.dart';
 import '../commands/bank_transfer_command.dart';
+import '../entities/account_entity.dart';
 
 class BankTransfer implements CommandUseCase<BankTransferCommand, Future<void>> {
   final AccountRepository accountRepository;
