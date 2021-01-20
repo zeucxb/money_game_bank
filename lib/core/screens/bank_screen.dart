@@ -11,9 +11,22 @@ import '../../modules/bank/widgets/users_list.dart';
 import '../ui/widgets/money_value_dialog.dart';
 import '../ui/widgets/string_value_dialog.dart';
 
-class BankScreen extends StatelessWidget {
-  final BankPresenter bankPresenter = BankPresenterFactory().call()..listAccounts();
-  final ProductPresenter productPresenter = ProductPresenterFactory().call()..listProducts();
+class BankScreen extends StatefulWidget {
+  @override
+  _BankScreenState createState() => _BankScreenState();
+}
+
+class _BankScreenState extends State<BankScreen> {
+  BankPresenter bankPresenter;
+  ProductPresenter productPresenter;
+
+  Future<bool> initPresenters() async {
+    bankPresenter = await BankPresenterFactory().call()
+      ..listAccounts();
+    productPresenter = ProductPresenterFactory().call()..listProducts();
+
+    return true;
+  }
 
   _showStringValueDialog(
     BuildContext context,
@@ -78,17 +91,27 @@ class BankScreen extends StatelessWidget {
             child: Icon(Icons.add),
           );
         }),
-        body: TabBarView(
-          children: [
-            UsersList(
-              bankPresenter: bankPresenter,
-            ),
-            ProductList(
-              productPresenter: productPresenter,
-              accounts: bankPresenter.accounts,
-            ),
-          ],
-        ),
+        body: FutureBuilder(
+            future: initPresenters(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return TabBarView(
+                  children: [
+                    UsersList(
+                      bankPresenter: bankPresenter,
+                    ),
+                    ProductList(
+                      productPresenter: productPresenter,
+                      accounts: bankPresenter?.accounts,
+                    ),
+                  ],
+                );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            }),
       ),
     );
   }

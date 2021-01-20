@@ -82,48 +82,60 @@ class UsersList extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(bottom: 20),
             child: Column(
-              children: accounts
-                  .map(
-                    (account) => AccountCard(
-                      account: account,
-                      bankPresenter: bankPresenter,
-                      actions: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.remove_circle_outline,
-                          ),
-                          iconSize: 50,
-                          onPressed: () => _showTransactionDialog(
-                            context,
-                            account,
-                            TransactionType.subtraction,
-                          ),
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.add_circle_outline),
-                          iconSize: 50,
-                          onPressed: () => _showTransactionDialog(
-                            context,
-                            account,
-                            TransactionType.addition,
-                          ),
-                        ),
-                        if (accounts.length > 1)
+              children: [
+                InkWell(
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    width: double.infinity,
+                    child: Center(
+                      child: Text('CLEAR'),
+                    ),
+                  ),
+                  onTap: () => bankPresenter.deleteAll(),
+                ),
+                ...accounts
+                    .map(
+                      (account) => AccountCard(
+                        account: account,
+                        bankPresenter: bankPresenter,
+                        actions: [
                           IconButton(
                             icon: Icon(
-                              Icons.send,
+                              Icons.remove_circle_outline,
                             ),
                             iconSize: 50,
-                            onPressed: () => _showBeneficiarySelectionDialog(
+                            onPressed: () => _showTransactionDialog(
                               context,
-                              bankPresenter.getBeneficiaries(account),
                               account,
+                              TransactionType.subtraction,
                             ),
                           ),
-                      ],
-                    ),
-                  )
-                  .toList(),
+                          IconButton(
+                            icon: Icon(Icons.add_circle_outline),
+                            iconSize: 50,
+                            onPressed: () => _showTransactionDialog(
+                              context,
+                              account,
+                              TransactionType.addition,
+                            ),
+                          ),
+                          if (accounts.length > 1)
+                            IconButton(
+                              icon: Icon(
+                                Icons.send,
+                              ),
+                              iconSize: 50,
+                              onPressed: () => _showBeneficiarySelectionDialog(
+                                context,
+                                bankPresenter.getBeneficiaries(account),
+                                account,
+                              ),
+                            ),
+                        ],
+                      ),
+                    )
+                    .toList(),
+              ],
             ),
           );
         },

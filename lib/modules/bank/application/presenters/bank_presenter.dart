@@ -17,10 +17,11 @@ class BankPresenter = _BankPresenterBase with _$BankPresenter;
 abstract class _BankPresenterBase with Store {
   final CommandUseCase<CreateAccountCommand, AccountEntity> _createAccount;
   final QueryUseCase<List<AccountEntity>> _listAccounts;
-  final CommandUseCase<AccountTransactionCommand, AccountEntity> _addTransaction;
-  final CommandUseCase<AccountTransactionCommand, AccountEntity> _subtractTransaction;
-  final CommandUseCase<BankTransferCommand, void> _bankTransfer;
+  final CommandUseCase<AccountTransactionCommand, Future<AccountEntity>> _addTransaction;
+  final CommandUseCase<AccountTransactionCommand, Future<AccountEntity>> _subtractTransaction;
+  final CommandUseCase<BankTransferCommand, Future<void>> _bankTransfer;
   final CommandUseCase<DeleteAccountCommand, AccountEntity> _deleteAccount;
+  final QueryUseCase<Future<void>> _deleteAllAccounts;
 
   _BankPresenterBase(
     this._createAccount,
@@ -29,6 +30,7 @@ abstract class _BankPresenterBase with Store {
     this._subtractTransaction,
     this._bankTransfer,
     this._deleteAccount,
+    this._deleteAllAccounts,
   );
 
   @observable
@@ -69,7 +71,7 @@ abstract class _BankPresenterBase with Store {
   }
 
   @action
-  void transaction(TransactionViewModel transaction) {
+  void transaction(TransactionViewModel transaction) async {
     if (transaction == null || transaction.value == 0) return;
 
     final transactionCommand = AccountTransactionCommand(
@@ -84,15 +86,15 @@ abstract class _BankPresenterBase with Store {
     AccountEntity updatedAccount;
 
     if (transaction.type == TransactionType.addition) {
-      updatedAccount = _addTransaction(transactionCommand);
+      updatedAccount = await _addTransaction(transactionCommand);
     } else if (transaction.type == TransactionType.subtraction) {
-      updatedAccount = _subtractTransaction(transactionCommand);
+      updatedAccount = await _subtractTransaction(transactionCommand);
     }
 
-    accounts.removeAt(updatedAccount.id - 1);
+    accounts.removeAt(updatedAccount.id);
 
     accounts.insert(
-      updatedAccount.id - 1,
+      updatedAccount.id,
       AccountViewModel(
         id: updatedAccount.id,
         name: updatedAccount.name,
@@ -103,10 +105,10 @@ abstract class _BankPresenterBase with Store {
 
   List<AccountViewModel> getBeneficiaries(AccountViewModel account) => [...accounts]..remove(account);
 
-  void bankTransfer(TransferViewModel transfer) {
+  void bankTransfer(TransferViewModel transfer) async {
     if (transfer == null || transfer.value == 0) return;
 
-    _bankTransfer(
+    await _bankTransfer(
       BankTransferCommand(
         AccountEntity(
           id: transfer.payerAccount.id,
@@ -135,6 +137,12 @@ abstract class _BankPresenterBase with Store {
         ),
       ),
     );
+
+    listAccounts();
+  }
+
+  deleteAll() async {
+    await _deleteAllAccounts();
 
     listAccounts();
   }

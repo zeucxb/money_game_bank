@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'core/screens/bank_screen.dart';
+import 'core/setup/setup.dart';
 
-void main() {
+void main() async {
+  await SetUp().call();
   runApp(MyApp());
 }
 

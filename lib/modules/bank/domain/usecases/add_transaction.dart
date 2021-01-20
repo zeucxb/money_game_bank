@@ -3,17 +3,24 @@ import '../../domain/repositories/account_repository.dart';
 import '../commands/account_transaction_command.dart';
 import '../entities/account_entity.dart';
 
-class AddTransaction implements CommandUseCase<AccountTransactionCommand, AccountEntity> {
+class AddTransaction implements CommandUseCase<AccountTransactionCommand, Future<AccountEntity>> {
   final AccountRepository accountRepository;
 
   AddTransaction(this.accountRepository);
 
   @override
-  AccountEntity call(AccountTransactionCommand command) {
+  Future<AccountEntity> call(AccountTransactionCommand command) async {
     assert(command != null);
 
-    final value = command.account.value + command.value;
+    final account = command.account;
+    final value = account.value + command.value;
 
-    return accountRepository.updateById(command.account.id, value);
+    return accountRepository.update(
+      AccountEntity(
+        id: account.id,
+        name: account.name,
+        value: value,
+      ),
+    );
   }
 }

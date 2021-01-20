@@ -3,8 +3,6 @@ import '../../domain/repositories/account_repository.dart';
 import '../commands/delete_account_command.dart';
 import '../entities/account_entity.dart';
 
-class RepositoryError {}
-
 class DeleteAccount implements CommandUseCase<DeleteAccountCommand, AccountEntity> {
   final AccountRepository accountRepository;
 
